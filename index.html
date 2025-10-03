@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sweet Treats Bakery</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Sweet Treats Bakery</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="checkout.html">Checkout</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Our Bestsellers</h2>
+    <div class="products">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=600&q=80" alt="Cupcake">
+        <h3>Vanilla Cupcake</h3>
+        <p>₹120 each</p>
+        <button class="btn" onclick="addToCart('Vanilla Cupcake')">Add to Cart</button>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1607952667795-4cf8b6b64a09?auto=format&fit=crop&w=600&q=80" alt="Croissant">
+        <h3>Butter Croissant</h3>
+        <p>₹80 each</p>
+        <button class="btn" onclick="addToCart('Butter Croissant')">Add to Cart</button>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1599785209793-1d2938dbe57b?auto=format&fit=crop&w=600&q=80" alt="Chocolate Cake">
+        <h3>Chocolate Cake</h3>
+        <p>₹450</p>
+        <button class="btn" onclick="addToCart('Chocolate Cake')">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Sweet Treats Bakery. All rights reserved.</p>
+  </footer>
+</body>
+</html>
