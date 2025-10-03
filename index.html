@@ -3,100 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sweet Treats Bakery</title>
+  <title>Landing Page - Aura Product</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #fff8f0;
-      color: #333;
-    }
-    header {
-      background: #ff6f61;
-      color: white;
-      padding: 15px;
-      text-align: center;
-    }
-    header nav a {
-      color: white;
-      margin: 0 10px;
-      text-decoration: none;
-    }
-    .products {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin: 20px;
-    }
-    .product {
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      text-align: center;
-      width: 200px;
-    }
-    button {
-      background: #ff6f61;
-      color: white;
-      border: none;
-      padding: 10px;
-      margin-top: 10px;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    button:hover {
-      background: #e65a50;
-    }
-    footer {
-      background: #333;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      margin-top: 20px;
-    }
+    /* General */
+    body {font-family:Poppins, sans-serif;margin:0;padding:0;background:#fdfdfd;color:#333;line-height:1.6;}
+    h1,h2{text-align:center;margin-bottom:10px;}
+    p{text-align:center;max-width:700px;margin:auto;}
+    a{text-decoration:none;}
+    .btn{display:inline-block;padding:12px 25px;background:#ff4da6;color:white;border-radius:25px;margin-top:15px;transition:0.3s;}
+    .btn:hover{background:#e60073;}
+
+    /* Hero */
+    .hero{background:linear-gradient(to right,#ff4da6,#ff8095);color:white;text-align:center;padding:80px 20px;}
+    .hero h1{font-size:2.8rem;}
+    .hero p{font-size:1.2rem;}
+
+    /* Description */
+    .description{padding:40px 20px;}
+
+    /* Features */
+    .features{padding:50px 20px;background:#f9f9f9;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:20px;}
+    .card{background:white;padding:20px;border-radius:12px;text-align:center;box-shadow:0 3px 6px rgba(0,0,0,0.1);}
+
+    /* Pricing */
+    .pricing{padding:50px 20px;background:#fff0f6;text-align:center;}
+    .pricing strong{font-size:1.5rem;}
+
+    /* Contact */
+    .contact{padding:50px 20px;background:#111;color:white;text-align:center;}
+    .contact form{display:flex;flex-direction:column;gap:12px;max-width:400px;margin:auto;}
+    .contact input,.contact textarea{padding:10px;border:none;border-radius:8px;}
+    .contact button{border:none;cursor:pointer;}
   </style>
 </head>
 <body>
-  <header>
-    <h1>Sweet Treats Bakery</h1>
-    <nav>
-      <a href="checkout.html">Checkout</a>
-    </nav>
+  <!-- Hero Section -->
+  <header class="hero">
+    <h1>Aura Smart Gadget</h1>
+    <p>The ultimate gadget to make your life smarter & simpler.</p>
+    <a href="checkout.html" class="btn">Buy Now</a>
   </header>
 
-  <main>
-    <h2>Our Products</h2>
-    <div class="products">
-      <div class="product">
-        <h3>Chocolate Cake</h3>
-        <p>₹500</p>
-        <button onclick="addToCart('Chocolate Cake', 500)">Add to Cart</button>
-      </div>
-      <div class="product">
-        <h3>Blueberry Muffin</h3>
-        <p>₹120</p>
-        <button onclick="addToCart('Blueberry Muffin', 120)">Add to Cart</button>
-      </div>
-      <div class="product">
-        <h3>Red Velvet Cupcake</h3>
-        <p>₹150</p>
-        <button onclick="addToCart('Red Velvet Cupcake', 150)">Add to Cart</button>
-      </div>
-    </div>
-  </main>
+  <!-- Product Description -->
+  <section class="description">
+    <h2>About the Product</h2>
+    <p>Aura is a sleek, lightweight smart gadget designed for productivity and fun. Stay connected, stay smart, and experience innovation at your fingertips.</p>
+  </section>
 
-  <footer>
-    <p>&copy; 2025 Sweet Treats Bakery</p>
+  <!-- Features Grid -->
+  <section class="features">
+    <h2>Key Features</h2>
+    <div class="grid">
+      <div class="card">⚡ Super Fast Performance</div>
+      <div class="card">🔋 Long-lasting Battery</div>
+      <div class="card">📱 Sleek & Modern Design</div>
+      <div class="card">☁️ Cloud Sync Support</div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing">
+    <h2>Special Offer</h2>
+    <p>Get Aura Smart Gadget now at just <strong>$199</strong> (Limited Time Offer!)</p>
+    <a href="checkout.html" class="btn">Order Now</a>
+  </section>
+
+  <!-- Contact Form -->
+  <footer class="contact">
+    <h2>Contact Us</h2>
+    <form onsubmit="return validateContact()">
+      <input type="text" id="cname" placeholder="Your Name" required>
+      <input type="email" id="cemail" placeholder="Your Email" required>
+      <textarea id="cmsg" placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+    <p>Email: support@aura.com | Phone: +91 9876543210</p>
   </footer>
 
   <script>
-    function addToCart(product, price) {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.push({ product, price });
-      localStorage.setItem("cart", JSON.stringify(cart));
-      alert(product + " added to cart!");
+    function validateContact(){
+      let name=document.getElementById("cname").value.trim();
+      let email=document.getElementById("cemail").value.trim();
+      let msg=document.getElementById("cmsg").value.trim();
+      if(name===""||email===""||msg===""){alert("Please fill all fields");return false;}
+      alert("Message sent successfully!");
+      return true;
     }
   </script>
 </body>
