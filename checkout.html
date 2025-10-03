@@ -5,70 +5,106 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout - Sweet Treats Bakery</title>
   <style>
-    body { margin:0; font-family:'Arial',sans-serif; background:#fffaf3; color:#333; }
-    header { background:#ff6f61; color:white; padding:15px; text-align:center; }
-    nav a { margin:0 15px; text-decoration:none; color:white; font-weight:bold; }
-    .container { padding:20px; }
-    ul { list-style:none; padding:0; }
-    li { margin:5px 0; }
-    .btn { margin-top:10px; padding:10px 15px; border:none; border-radius:5px; background:#ff6f61; color:white; cursor:pointer; font-weight:bold; }
-    .btn:hover { background:#e85b50; }
-    footer { text-align:center; padding:15px; background:#333; color:white; margin-top:20px; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff8f0;
+      color: #333;
+    }
+    header {
+      background: #ff6f61;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    header nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    main {
+      padding: 20px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin: 5px 0;
+    }
+    form {
+      margin-top: 20px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 8px 0;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #ff6f61;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #e65a50;
+    }
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Sweet Treats Bakery</h1>
+    <h1>Checkout</h1>
     <nav>
       <a href="index.html">Home</a>
-      <a href="checkout.html">Checkout</a>
     </nav>
   </header>
 
-  <div class="container">
+  <main>
     <h2>Your Cart</h2>
-    <ul id="cartList"></ul>
-    <h3 id="totalPrice"></h3>
+    <ul id="cartItems"></ul>
+    <h3>Total: ₹<span id="cartTotal">0</span></h3>
 
-    <h2>Customer Details</h2>
+    <h2>Customer Information</h2>
     <form id="checkoutForm">
-      <input type="text" id="name" placeholder="Full Name" required><br><br>
-      <input type="text" id="address" placeholder="Address" required><br><br>
-      <input type="tel" id="phone" placeholder="Phone Number" required><br><br>
-      <button type="submit" class="btn">Place Order</button>
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="text" id="address" placeholder="Address" required>
+      <input type="tel" id="phone" placeholder="Phone" required>
+      <button type="submit">Place Order</button>
     </form>
-  </div>
+  </main>
 
   <footer>
-    <p>&copy; 2025 Sweet Treats Bakery. All rights reserved.</p>
+    <p>&copy; 2025 Sweet Treats Bakery</p>
   </footer>
 
   <script>
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    function loadCart() {
-      const list = document.getElementById("cartList");
-      const totalPrice = document.getElementById("totalPrice");
-      list.innerHTML = "";
-      let total = 0;
-      if(cart.length===0){ list.innerHTML="<li>Your cart is empty.</li>"; }
-      else {
-        cart.forEach(item=>{
-          let li=document.createElement("li");
-          li.textContent=item.name+" - ₹"+item.price;
-          list.appendChild(li);
-          total+=item.price;
-        });
-      }
-      totalPrice.textContent="Total: ₹"+total;
-    }
-    loadCart();
+    let cartList = document.getElementById("cartItems");
+    let total = 0;
 
-    document.getElementById("checkoutForm").addEventListener("submit", e=>{
+    cart.forEach(item => {
+      let li = document.createElement("li");
+      li.textContent = `${item.product} - ₹${item.price}`;
+      cartList.appendChild(li);
+      total += item.price;
+    });
+    document.getElementById("cartTotal").textContent = total;
+
+    document.getElementById("checkoutForm").addEventListener("submit", function(e) {
       e.preventDefault();
-      const name=document.getElementById("name").value;
-      localStorage.setItem("customerName", name);
       localStorage.removeItem("cart");
-      window.location.href="thankyou.html";
+      window.location.href = "thankyou.html";
     });
   </script>
 </body>
