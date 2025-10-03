@@ -3,109 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout - Sweet Treats Bakery</title>
+  <title>Checkout - Aura</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #fff8f0;
-      color: #333;
-    }
-    header {
-      background: #ff6f61;
-      color: white;
-      padding: 15px;
-      text-align: center;
-    }
-    header nav a {
-      color: white;
-      margin: 0 10px;
-      text-decoration: none;
-    }
-    main {
-      padding: 20px;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      margin: 5px 0;
-    }
-    form {
-      margin-top: 20px;
-    }
-    input, button {
-      padding: 10px;
-      margin: 8px 0;
-      width: 100%;
-      max-width: 400px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    button {
-      background: #ff6f61;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #e65a50;
-    }
-    footer {
-      background: #333;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      margin-top: 20px;
-    }
+    body{font-family:Poppins,sans-serif;margin:0;background:#fdfdfd;color:#333;}
+    .hero{background:linear-gradient(to right,#ff4da6,#ff8095);color:white;text-align:center;padding:60px 20px;}
+    .hero h1{font-size:2.2rem;}
+    .contact{padding:50px 20px;text-align:center;}
+    .contact form{display:flex;flex-direction:column;gap:12px;max-width:400px;margin:auto;}
+    .contact input{padding:10px;border:1px solid #ccc;border-radius:8px;}
+    .btn{padding:12px;background:#ff4da6;color:white;border:none;border-radius:25px;cursor:pointer;}
+    .btn:hover{background:#e60073;}
   </style>
 </head>
 <body>
-  <header>
+  <header class="hero">
     <h1>Checkout</h1>
-    <nav>
-      <a href="index.html">Home</a>
-    </nav>
+    <p>Fill in your details to complete the purchase.</p>
   </header>
 
-  <main>
-    <h2>Your Cart</h2>
-    <ul id="cartItems"></ul>
-    <h3>Total: ₹<span id="cartTotal">0</span></h3>
-
-    <h2>Customer Information</h2>
-    <form id="checkoutForm">
+  <section class="contact">
+    <form onsubmit="return validateCheckout()" action="thankyou.html" method="get">
       <input type="text" id="name" placeholder="Full Name" required>
-      <input type="text" id="address" placeholder="Address" required>
-      <input type="tel" id="phone" placeholder="Phone" required>
-      <button type="submit">Place Order</button>
+      <input type="email" id="email" placeholder="Email Address" required>
+      <input type="text" id="address" placeholder="Shipping Address" required>
+      <input type="number" id="card" placeholder="Card Number" required>
+      <button type="submit" class="btn">Complete Purchase</button>
     </form>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Sweet Treats Bakery</p>
-  </footer>
+  </section>
 
   <script>
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let cartList = document.getElementById("cartItems");
-    let total = 0;
-
-    cart.forEach(item => {
-      let li = document.createElement("li");
-      li.textContent = `${item.product} - ₹${item.price}`;
-      cartList.appendChild(li);
-      total += item.price;
-    });
-    document.getElementById("cartTotal").textContent = total;
-
-    document.getElementById("checkoutForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      localStorage.removeItem("cart");
-      window.location.href = "thankyou.html";
-    });
+    function validateCheckout(){
+      let name=document.getElementById("name").value.trim();
+      let email=document.getElementById("email").value.trim();
+      let address=document.getElementById("address").value.trim();
+      let card=document.getElementById("card").value.trim();
+      if(name===""||email===""||address===""||card===""){
+        alert("All fields are required!"); return false;
+      }
+      if(card.length<8){alert("Enter a valid card number!");return false;}
+      return true;
+    }
   </script>
 </body>
 </html>
