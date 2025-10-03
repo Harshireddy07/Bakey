@@ -4,8 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sweet Treats Bakery</title>
-  <link rel="stylesheet" href="style.css">
-  <script defer src="script.js"></script>
+  <style>
+    body { margin:0; font-family:'Arial',sans-serif; background:#fffaf3; color:#333; }
+    header { background:#ff6f61; color:white; padding:15px; text-align:center; }
+    nav a { margin:0 15px; text-decoration:none; color:white; font-weight:bold; }
+    .container { padding:20px; }
+    .products { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; }
+    .card { background:white; border-radius:10px; padding:15px; box-shadow:0 2px 8px rgba(0,0,0,0.1); text-align:center; }
+    .card img { max-width:100%; border-radius:10px; }
+    .btn { margin-top:10px; padding:10px 15px; border:none; border-radius:5px; background:#ff6f61; color:white; cursor:pointer; font-weight:bold; }
+    .btn:hover { background:#e85b50; }
+    footer { text-align:center; padding:15px; background:#333; color:white; margin-top:20px; }
+  </style>
 </head>
 <body>
   <header>
@@ -23,19 +33,19 @@
         <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=600&q=80" alt="Cupcake">
         <h3>Vanilla Cupcake</h3>
         <p>₹120 each</p>
-        <button class="btn" onclick="addToCart('Vanilla Cupcake')">Add to Cart</button>
+        <button class="btn" onclick="addToCart('Vanilla Cupcake',120)">Add to Cart</button>
       </div>
       <div class="card">
         <img src="https://images.unsplash.com/photo-1607952667795-4cf8b6b64a09?auto=format&fit=crop&w=600&q=80" alt="Croissant">
         <h3>Butter Croissant</h3>
         <p>₹80 each</p>
-        <button class="btn" onclick="addToCart('Butter Croissant')">Add to Cart</button>
+        <button class="btn" onclick="addToCart('Butter Croissant',80)">Add to Cart</button>
       </div>
       <div class="card">
         <img src="https://images.unsplash.com/photo-1599785209793-1d2938dbe57b?auto=format&fit=crop&w=600&q=80" alt="Chocolate Cake">
         <h3>Chocolate Cake</h3>
         <p>₹450</p>
-        <button class="btn" onclick="addToCart('Chocolate Cake')">Add to Cart</button>
+        <button class="btn" onclick="addToCart('Chocolate Cake',450)">Add to Cart</button>
       </div>
     </div>
   </div>
@@ -43,5 +53,14 @@
   <footer>
     <p>&copy; 2025 Sweet Treats Bakery. All rights reserved.</p>
   </footer>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    function addToCart(item, price) {
+      cart.push({ name:item, price:price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(item + " added to cart!");
+    }
+  </script>
 </body>
 </html>
